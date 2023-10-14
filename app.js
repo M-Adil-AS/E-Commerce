@@ -14,6 +14,8 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs.json');
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -53,6 +55,11 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 app.use(express.static('./public'));
 app.use(fileUpload({ useTempFiles: true }));
+
+// https://metamug.com/util/postman-to-swagger/
+// https://onlineyamltools.com/convert-yaml-to-json
+app.use('/api-docs', swaggerUi.serve);
+app.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
