@@ -340,7 +340,6 @@
 				"schema": {
 				  "type": "object",
 				  "example": {
-					"email": "madilas565@gmail.com",
 					"name": "Adil Ahmed"
 				  }
 				}
