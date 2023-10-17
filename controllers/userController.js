@@ -29,11 +29,12 @@ const showCurrentUser = async (req, res) => {
 
 
 const updateUser = async (req, res) => {
-  const { email, name } = req.body;
+  const { name } = req.body;
 
   const user = await User.findOne({ _id: req.user.userId });
 
-  user.email = email;
+  // Can't be allowed to change email
+  // user.email = email;
   user.name = name;
 
   await user.save();
